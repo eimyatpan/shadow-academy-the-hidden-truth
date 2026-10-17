@@ -1,0 +1,49 @@
+/* Phase 4: quiet, client-only presentation polish. */
+.topbar-tools{display:flex;align-items:center;gap:18px}
+.settings-trigger{display:flex;align-items:center;gap:7px;min-height:42px;padding:0 11px;border:1px solid #d6c6814a;background:#181823b8;color:#e6d89e;font:8px 'DM Mono',monospace;letter-spacing:.09em}
+.settings-trigger:hover,.settings-trigger:focus-visible{border-color:#e7d695;box-shadow:0 0 18px #dfc87822}
+.settings-trigger:first-letter{font-size:16px}
+.settings-dialog{width:min(100%,540px);max-height:min(88vh,760px);overflow-y:auto;text-align:left;padding:30px 32px 24px;border-color:#d9c87c62;background:linear-gradient(155deg,#201e2d,#11131df7)}
+.settings-dialog h2{margin:9px 0;color:#f1e8d5;font:600 30px 'Playfair Display',Georgia,serif}
+.settings-intro{margin:0 0 16px;color:#bcb6c3;font-size:12px;line-height:1.6}
+.enable-audio-button{width:100%;margin:0 0 15px;min-height:48px;font:9px 'DM Mono',monospace;letter-spacing:.1em}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-top:1px solid #ffffff16}
+.setting-row>div{display:grid;gap:4px}.setting-row b{color:#eee9f2;font-size:12px}.setting-row small{color:#a49dad;font-size:10px}
+.setting-mute{flex:0 0 78px;min-height:38px;border:1px solid #8fc5a45a;background:#1d3028;color:#b9e2c9;font:8px 'DM Mono',monospace;letter-spacing:.1em}
+.setting-mute.is-muted{border-color:#aaa0b146;background:#22212a;color:#b7b1c0}
+.setting-slider{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px 14px;padding:0 0 12px;color:#d5cedd;font-size:11px}
+.setting-slider strong{color:#e4d49a;font:9px 'DM Mono',monospace}
+.setting-slider input{grid-column:1/-1;width:100%;accent-color:#c8ae70;min-height:24px}
+.settings-done{width:100%;margin-top:8px;min-height:44px}
+.chat-toggle{display:none}
+/* Characters stay on-model: movement is a small vertical breath; expression swaps crossfade. */
+.character-portrait{isolation:isolate}
+.character-portrait img{will-change:opacity,transform}
+.vn-cast-card.is-speaking .vn-cast-portrait img,.vn-portrait.is-speaking .vn-character-portrait img,.featured-portrait img,.party-portrait img,.role-portrait img,.ending-player-portrait img{animation:phase4-breathe 4.8s ease-in-out infinite}
+.vn-cast-portrait,.featured-portrait,.party-portrait{position:relative;isolation:isolate;overflow:hidden}
+.vn-cast-card{animation:phase4-enter .42s ease both;animation-delay:calc(var(--cast-index,0) * 45ms)}
+.cinematic-scene-stage{animation:scene-arrive .65s ease both}
+.scene-discovery-card{animation:clue-arrive .5s cubic-bezier(.2,.7,.2,1) both}
+.vote-countdown{position:relative;overflow:hidden;animation:vote-arrive .55s ease both}
+.vote-countdown::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,transparent, #e4d39318,transparent);transform:translateX(-100%);animation:countdown-sheen 7s ease-in-out infinite}
+.cinematic-ending{animation:ending-arrive .8s cubic-bezier(.2,.75,.2,1) both}
+.ending-backdrop-mark{animation:sigil-reveal 2.4s ease both}
+.guide-backdrop{animation:veil-in .24s ease both}
+.guide-dialog{animation:dialog-arrive .28s ease both}
+.button,.suspect,.choice,.game-utility button,.vn-controls button,.scene-hotspot,.settings-trigger{touch-action:manipulation}
+.button,.suspect,.choice,.scene-hotspot,.chat-form button,.chat-toggle,.settings-trigger{min-height:42px}
+.evidence-tabs button,.guide-close,.vn-topline button,.evidence-close-button,.role-utility,.role-confirm-button,.lobby-controls button{min-height:42px}
+.scene-hotspot{min-width:48px;min-height:48px}
+@keyframes phase4-breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+@keyframes phase4-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scene-arrive{from{opacity:.2;filter:brightness(.72);transform:scale(1.008)}to{opacity:1;filter:brightness(1);transform:scale(1)}}
+@keyframes clue-arrive{from{opacity:0;transform:translateY(12px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes vote-arrive{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes countdown-sheen{0%,28%,100%{transform:translateX(-100%)}55%{transform:translateX(100%)}}
+@keyframes ending-arrive{from{opacity:0;transform:translateY(10px) scale(.995);filter:brightness(.65)}to{opacity:1;transform:translateY(0) scale(1);filter:brightness(1)}}
+@keyframes sigil-reveal{0%{opacity:0;transform:scale(.7) rotate(-18deg)}40%{opacity:.5}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes veil-in{from{opacity:0}to{opacity:1}}@keyframes dialog-arrive{from{opacity:0;transform:translateY(8px) scale(.99)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:760px){.topbar-tools{gap:8px}.settings-trigger{min-height:42px;padding:0 8px}.settings-trigger span{font-size:7px}.mobile-chat{min-height:unset!important;max-height:none!important;overflow:hidden}.mobile-chat.chat-collapsed{min-height:70px!important;max-height:70px!important}.mobile-chat.chat-collapsed .chat-messages,.mobile-chat.chat-collapsed .chat-form,.mobile-chat.chat-collapsed .chat-hint{display:none}.mobile-chat .chat-head{min-height:68px;padding:12px 13px}.mobile-chat.chat-expanded{max-height:430px!important}.mobile-chat.chat-expanded .chat-messages{min-height:120px;max-height:265px}.chat-toggle{display:block;min-height:40px;padding:0 10px;border:1px solid #d9c67d59;background:#211e2c;color:#e4d79e;font:7px 'DM Mono',monospace;letter-spacing:.06em;white-space:nowrap}.settings-dialog{padding:25px 19px 18px}.settings-dialog h2{font-size:26px}.vn-dialogue-box p{font-size:clamp(15px,4vw,18px);line-height:1.55}.scene-hotspot{width:auto;min-width:48px;min-height:48px}.chat-form input{min-height:44px}.chat-form button{width:44px;min-height:44px}}
+@media(max-width:420px){.topbar{height:68px}.topbar-tools{gap:6px}.connection{font-size:7px;letter-spacing:.04em}.settings-trigger{width:40px;justify-content:center;padding:0;font-size:15px}.settings-trigger span{display:none}.chat-live{display:none}.mobile-chat .chat-head{gap:7px}.chat-toggle{padding-inline:7px;font-size:6px}.vn-controls button,.game-utility button{min-height:42px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.motion-disabled *, .motion-disabled *::before, .motion-disabled *::after{scroll-behavior:auto!important;animation:none!important;transition:none!important;}

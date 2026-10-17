@@ -1,0 +1,18 @@
+{
+  "name": "shadow-academy-hidden-truth",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:client": "npm --workspace client run dev -- --host 0.0.0.0",
+    "dev:server": "npm --workspace server run dev",
+    "build": "npm --workspace client run build",
+    "test:phase22": "node scripts/phase22-multiplayer-test.mjs",
+    "test:phase3": "node scripts/phase22-multiplayer-test.mjs",
+    "test:timeouts": "node scripts/phase3-timeout-test.mjs",
+    "test:phase4-audio": "node scripts/phase4-audio-settings-test.mjs",
+    "start": "npm --workspace server start"
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}
